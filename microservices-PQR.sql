@@ -28,5 +28,5 @@ CREATE TABLE pqrs(
     descripcion_pqrs TEXT NOT NULL,
     data_register_pqrs TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status_pqrs ENUM('PENDIENTE', 'EN PROCESO', 'FINALIZADO') DEFAULT 'PENDIENTE',
-    FOREIGN KEY (id_user) REFERENCES user('id_user')
+    FOREIGN KEY (id_user) REFERENCES usuario(id_user)
 );
