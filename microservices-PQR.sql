@@ -16,17 +16,25 @@ CREATE TABLE users(
     address_user VARCHAR(30) NULL,
     phone_number_user VARCHAR(10) NULL,
     id_rol INT NOT NULL,
-    date_register_user TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status_user ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO',
+    created_at_user TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_rol) REFERENCES rol(id_rol)
 );
 
 CREATE TABLE pqrs(
     id_pqrs INT AUTO_INCREMENT PRIMARY KEY,
     id_user INT NOT NULL,
-    type_pqrs ENUM('PETICIÓN', 'QUEJA', 'RECLAMO', 'SUGERENCIA'),
-    descripcion_pqrs TEXT NOT NULL,
-    data_register_pqrs TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    type_pqrs ENUM('PETICIÓN', 'QUEJA', 'RECLAMO', 'SUGERENCIA') NOT NULL,
+    description_pqrs TEXT NOT NULL,
     status_pqrs ENUM('PENDIENTE', 'EN PROCESO', 'FINALIZADO') DEFAULT 'PENDIENTE',
-    FOREIGN KEY (id_user) REFERENCES usuario(id_user)
+    created_at_pqrs TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_user) REFERENCES users(id_user)
+);
+
+CREATE TABLE logs(
+    id_log INT AUTO_INCREMENT PRIMARY KEY,
+    action_log VARCHAR(30) NOT NULL,
+    id_user INT NOT NULL,
+    created_at_log TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_user) REFERENCES users(id_user) 
 );
