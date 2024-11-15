@@ -5,20 +5,20 @@ USE microservices_PQRS;
 CREATE TABLE rol(
     id_rol INT AUTO_INCREMENT PRIMARY KEY,
     rol VARCHAR(20) NOT NULL,
-    date_register_rol TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    status_rol ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO'
+    status_rol ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO',
+    created_at_rol TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE usuario(
+CREATE TABLE users(
     id_user INT AUTO_INCREMENT PRIMARY KEY,
     name_user VARCHAR(60) NOT NULL,
-    lastname_user VARCHAR(60) NOT NULL,
     email_user VARCHAR(60) NOT NULL,
+    address_user VARCHAR(30) NULL,
     phone_number_user VARCHAR(10) NULL,
-    rol_user INT NOT NULL,
+    id_rol INT NOT NULL,
     date_register_user TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status_user ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO',
-    FOREIGN KEY (rol_user) REFERENCES rol(id_rol)
+    FOREIGN KEY (id_rol) REFERENCES rol(id_rol)
 );
 
 CREATE TABLE pqrs(
